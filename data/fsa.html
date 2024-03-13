@@ -1,0 +1,105 @@
+
+       <script>
+       try {
+       require.config({
+       paths: {
+       "d3": "https://cdnjs.cloudflare.com/ajax/libs/d3/4.13.0/d3",
+       "dagreD3": "https://cdnjs.cloudflare.com/ajax/libs/dagre-d3/0.6.1/dagre-d3.min"
+       }
+       });
+       } catch {
+       ["https://cdnjs.cloudflare.com/ajax/libs/d3/4.13.0/d3.js",
+       "https://cdnjs.cloudflare.com/ajax/libs/dagre-d3/0.6.1/dagre-d3.min.js"].forEach(
+            function (src) {
+            var tag = document.createElement('script');
+            tag.src = src;
+            document.body.appendChild(tag);
+            }
+        )
+        }
+        try {
+        requirejs(['d3', 'dagreD3'], function() {});
+        } catch (e) {}
+        try {
+        require(['d3', 'dagreD3'], function() {});
+        } catch (e) {}
+        </script>
+        <style>
+        .node rect,
+        .node circle,
+        .node ellipse {
+        stroke: #333;
+        fill: #fff;
+        stroke-width: 1px;
+        }
+
+        .edgePath path {
+        stroke: #333;
+        fill: #333;
+        stroke-width: 1.5px;
+        }
+        </style>
+        <center><svg width="850" height="600" id="fst_b5d67479a4fe47b4a95be569da92f96b"><g/></svg></center>
+        <script>
+        (function render_d3() {
+        var d3, dagreD3;
+        try { // requirejs is broken on external domains
+          d3 = require('d3');
+          dagreD3 = require('dagreD3');
+        } catch (e) {
+          // for google colab
+          if(typeof window.d3 !== "undefined" && typeof window.dagreD3 !== "undefined"){
+            d3 = window.d3;
+            dagreD3 = window.dagreD3;
+          } else { // not loaded yet, so wait and try again
+            setTimeout(render_d3, 50);
+            return;
+          }
+        }
+        //alert("loaded");
+        var g = new dagreD3.graphlib.Graph().setGraph({ 'rankdir': 'LR' });
+        g.setNode("0", { label: "0 / 1.000" , shape: "circle" });
+g.node("0").style = "fill: #66c2a5"; 
+g.setNode("2",{label:"2",shape:"circle"});
+g.node("2").style = "fill: #8da0cb"; 
+g.setNode("3",{label:"3",shape:"circle"});
+g.node("3").style = "fill: #8da0cb"; 
+g.setNode("4",{label:"4",shape:"circle"});
+g.node("4").style = "fill: #8da0cb"; 
+g.setNode("1",{label:"1 / 0.338",shape:"circle"});
+g.node("1").style = "fill: #fc8d62"; 
+g.setEdge("0","4",{arrowhead:"vee",label:"b / 0.578","style": "stroke: rgb(192, 192, 192); fill: none;", "labelStyle": "fill: rgb(192, 192, 192); stroke: rgb(192, 192, 192); ", "arrowheadStyle": "fill: rgb(192, 192, 192); stroke: rgb(192, 192, 192);"});
+g.setEdge("0","0",{arrowhead:"vee",label:"a / 0.422","style": "stroke: rgb(192, 192, 192); fill: none;", "labelStyle": "fill: rgb(192, 192, 192); stroke: rgb(192, 192, 192); ", "arrowheadStyle": "fill: rgb(192, 192, 192); stroke: rgb(192, 192, 192);"});
+g.setEdge("1","3",{arrowhead:"vee",label:"d / 0.044","style": "stroke: rgb(192, 192, 192); fill: none;", "labelStyle": "fill: rgb(192, 192, 192); stroke: rgb(192, 192, 192); ", "arrowheadStyle": "fill: rgb(192, 192, 192); stroke: rgb(192, 192, 192);"});
+g.setEdge("1","0",{arrowhead:"vee",label:"b / 0.617","style": "stroke: rgb(192, 192, 192); fill: none;", "labelStyle": "fill: rgb(192, 192, 192); stroke: rgb(192, 192, 192); ", "arrowheadStyle": "fill: rgb(192, 192, 192); stroke: rgb(192, 192, 192);"});
+g.setEdge("2","4",{arrowhead:"vee",label:"c / 0.482","style": "stroke: rgb(192, 192, 192); fill: none;", "labelStyle": "fill: rgb(192, 192, 192); stroke: rgb(192, 192, 192); ", "arrowheadStyle": "fill: rgb(192, 192, 192); stroke: rgb(192, 192, 192);"});
+g.setEdge("2","1",{arrowhead:"vee",label:"b / 0.463","style": "stroke: rgb(192, 192, 192); fill: none;", "labelStyle": "fill: rgb(192, 192, 192); stroke: rgb(192, 192, 192); ", "arrowheadStyle": "fill: rgb(192, 192, 192); stroke: rgb(192, 192, 192);"});
+g.setEdge("2","2",{arrowhead:"vee",label:"a / 0.055","style": "stroke: rgb(192, 192, 192); fill: none;", "labelStyle": "fill: rgb(192, 192, 192); stroke: rgb(192, 192, 192); ", "arrowheadStyle": "fill: rgb(192, 192, 192); stroke: rgb(192, 192, 192);"});
+g.setEdge("3","4",{arrowhead:"vee",label:"a / 1.000","style": "stroke: rgb(192, 192, 192); fill: none;", "labelStyle": "fill: rgb(192, 192, 192); stroke: rgb(192, 192, 192); ", "arrowheadStyle": "fill: rgb(192, 192, 192); stroke: rgb(192, 192, 192);"});
+g.setEdge("4","2",{arrowhead:"vee",label:"a / 1.000","style": "stroke: rgb(192, 192, 192); fill: none;", "labelStyle": "fill: rgb(192, 192, 192); stroke: rgb(192, 192, 192); ", "arrowheadStyle": "fill: rgb(192, 192, 192); stroke: rgb(192, 192, 192);"});
+var svg = d3.select("#fst_b5d67479a4fe47b4a95be569da92f96b"); 
+
+        var inner = svg.select("g");
+
+        // Set up zoom support
+        var zoom = d3.zoom().scaleExtent([0.3, 5]).on("zoom", function() {
+        inner.attr("transform", d3.event.transform);
+        });
+        svg.call(zoom);
+
+        // Create the renderer
+        var render = new dagreD3.render();
+
+        // Run the renderer. This is what draws the final graph.
+        render(inner, g);
+
+        // Center the graph
+        var initialScale = 0.75;
+        svg.call(zoom.transform, d3.zoomIdentity.translate(
+            (svg.attr("width")-g.graph().width*initialScale)/2,20).scale(initialScale));
+
+        svg.attr('height', g.graph().height * initialScale + 50);
+        })();
+
+        </script>
+        

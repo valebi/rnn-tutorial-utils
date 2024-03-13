@@ -1,0 +1,10 @@
+# torch==2.2.0
+#matplotlib==3.8.0
+#jupyterlab==4.1.3
+dill==0.3.8
+# scipy==1.12.0
+seaborn==0.13.2
+scikit-learn>=1.3.0
+#tqdm==4.66.2
+# ipywidgets==8.1.2
+html2image==2.0.4.3
